@@ -21,7 +21,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/users/register").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/actuator/health").permitAll()
+
+                        .requestMatchers("/api/tasks/**").permitAll()
+                        .requestMatchers("/api/tags/**").permitAll()
+                        .requestMatchers("/api/users/**").permitAll()
+
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
